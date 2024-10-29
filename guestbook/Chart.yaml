@@ -1,0 +1,6 @@
+apiVersion: v2
+name: guestbook
+version: 0.1.0
+appVersion: "1.0"
+type: application
+description: guestbook 1.1.0 test chart

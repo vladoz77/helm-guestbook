@@ -1,0 +1,6 @@
+apiVersion: v2
+name: guestbook
+version: 1.1.0
+appVersion: "2.0"
+type: application
+description: guestbook umbrella 1.1.0 test chart

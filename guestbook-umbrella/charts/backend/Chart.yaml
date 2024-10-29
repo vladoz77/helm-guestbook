@@ -1,0 +1,6 @@
+apiVersion: v2
+name: backend
+version: 0.1.0
+appVersion: "1.0"
+type: application
+description: backend 0.1.0 test chart
