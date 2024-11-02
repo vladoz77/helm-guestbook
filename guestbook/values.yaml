@@ -1,0 +1,12 @@
+fullnameOverride: frontend
+replicaCount: 1
+image:
+  repository: phico/frontend
+  tag: "1.1"
+  pullPolicy: Always
+service:
+  port: 80
+  type: ClusterIP
+ingress:
+  enabled: true
+  host: frontend.home.local
