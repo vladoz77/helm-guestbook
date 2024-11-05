@@ -1,0 +1,13 @@
+replicaCount: "1"
+image:
+  repos: phico/backend
+  tag: "2.0"
+  imagePullPolicy: Always
+secret:
+  mongodb_url:
+    chart: database
+    port: 27017
+ingress:
+  enable: true
+  host: backend.home.local
+  

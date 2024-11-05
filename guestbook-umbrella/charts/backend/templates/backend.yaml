@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend
+  name: {{ include "backend.fullname" .}}
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: backend 
+      app: {{ include "backend.fullname" .}} 
   template:
     metadata:
       labels:
-        app: backend
+        app: {{ include "backend.fullname" .}}
     spec:
       containers:
-      - image: phico/backend:2.0
-        imagePullPolicy: Always
-        name: backend
+      - image: {{ .Values.image.repos }}:{{ .Values.image.tag}}
+        imagePullPolicy: {{ .Values.image.imagePullPolicy}}
+        name: {{ include "backend.fullname" .}}
         ports:
-        - name: backend
+        - name: {{ .Chart.Name}}
           containerPort: 3000
         env:
         - name: MONGODB_URI
           valueFrom:
             secretKeyRef:
-              name: backend-secret
+              name: {{ include "backend.fullname" .}}-secret
               key: mongodb-uri

@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mongodb
+  name: {{ include "database.fullname" .}}
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount}}
   selector:
     matchLabels:
-      app: mongodb
+      app: {{ include "database.fullname" .}}
   template:
     metadata:
       labels:
-        app: mongodb
+        app: {{ include "database.fullname" .}}
     spec:
       containers:
         - image: mongo
@@ -20,21 +20,21 @@ spec:
           - name: MONGO_INITDB_ROOT_USERNAME
             valueFrom:
               secretKeyRef:
-                name: mongodb-secret
+                name: {{ include "database.fullname" .}}-secret
                 key: mongodb-username
           - name: MONGO_INITDB_ROOT_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: mongodb-secret
+                name: {{ include "database.fullname" .}}-secret
                 key: mongodb-password
-          name: mongodb
+          name: {{ include "database.fullname" .}}
           ports:
             - name: mongodb
               containerPort: 27017
           volumeMounts:
-            - name: mongodb-volume
+            - name: {{ include "database.fullname" .}}-volume
               mountPath: /data/db
       volumes:
-        - name: mongodb-volume
+        - name: {{ include "database.fullname" .}}-volume
           persistentVolumeClaim:
-            claimName: mongodb-pvc
+            claimName: {{ include "database.fullname" .}}-pvc

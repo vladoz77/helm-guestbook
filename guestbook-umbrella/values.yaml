@@ -1,0 +1,9 @@
+backend:
+  secret:
+    mongodb_url:
+      user: admin
+      password: password
+
+database:
+  username: admin
+  password: password

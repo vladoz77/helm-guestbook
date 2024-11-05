@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend
+  name: {{ include "frontend.fullname" .}}
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: frontend 
+      app: {{ include "frontend.fullname" .}} 
   template:
     metadata:
       labels:
-        app: frontend
+        app: {{ include "frontend.fullname" .}}
     spec:
       containers:
-      - image: phico/frontend:2.0
-        imagePullPolicy: Always
-        name: frontend
+      - image: {{ .Values.image.repos }}:{{ .Values.image.tag }}
+        imagePullPolicy: {{ .Values.image.imagePullPolicy }}
+        name: {{ include "frontend.fullname" .}}
         ports:
-        - name: frontend
+        - name: {{ .Chart.Name}}
           containerPort: 4200
 
