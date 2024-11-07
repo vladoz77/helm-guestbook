@@ -5,14 +5,17 @@ metadata:
   name: {{ include "frontend.fullname" .}}-ingress
 spec:
   rules:
-  - host: {{ .Values.ingress.host | quote }}
+  {{- with .Values.ingress }}
+  - host: {{ .host | quote }}
     http:
       paths:
       - path: /
         pathType: Prefix
+  {{- end }}
         backend:
           service: 
             name: {{ include "frontend.fullname" . }}
             port: 
               number: 80
-{{- end}}
+  
+{{- end }}

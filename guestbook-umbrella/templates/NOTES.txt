@@ -1,0 +1,4 @@
+You can access the Guestbook application  at following URl
+{{- range .Values.ingress.hosts}}
+http://{{ $.Release.Name }}.{{ .host.domain }}
+{{- end }}

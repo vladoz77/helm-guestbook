@@ -16,6 +16,17 @@ spec:
       - image: {{ .Values.image.repos }}:{{ .Values.image.tag }}
         imagePullPolicy: {{ .Values.image.imagePullPolicy }}
         name: {{ include "frontend.fullname" .}}
+        env:
+        - name: BACKEND_URI
+          valueFrom:
+            configMapKeyRef:
+              name: {{ include "frontend.fullname" . }}-config
+              key: backend-uri
+        - name: GUESTBOOK_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: {{ include "frontend.fullname" . }}-config
+              key: guestbook-name
         ports:
         - name: {{ .Chart.Name}}
           containerPort: 4200

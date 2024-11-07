@@ -7,7 +7,4 @@ secret:
   mongodb_url:
     chart: database
     port: 27017
-ingress:
-  enable: true
-  host: backend.home.local
   

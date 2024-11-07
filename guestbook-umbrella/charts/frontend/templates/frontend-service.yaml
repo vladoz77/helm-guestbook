@@ -5,6 +5,7 @@ metadata:
     name: {{ include "frontend.fullname" . }}
   name: {{ include "frontend.fullname" . }}
 spec:
+  type: {{ .Values.service.type }}
   ports:
     - protocol: "TCP"
       port: 80
